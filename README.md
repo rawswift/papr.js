@@ -1,16 +1,16 @@
 # Papr.js
 
-Paper placeholder
+Paper placeholder.
 
 ## Paper Size
 
 American paper sizes:
 
-- letter
-- legal
-- ledger
-- tabloid
-- executive
+- Letter
+- Legal
+- Ledger
+- Tabloid
+- Executive
 
 ISO A paper sizes:
 
