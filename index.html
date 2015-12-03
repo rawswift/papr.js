@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Papr.js - Paper placeholder">
+    <meta name="author" content="Ryan Yonzon">
+    <title>Papr.js - Paper placeholder</title>
+    <!-- <link href="/path/to/stylesheet.css" rel="stylesheet"> -->
+    <style>
+        html, body {
+            font-family: Arial, Helvetica, sans-serif;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Papr.js</h1>
+
+<h3>A4 (Portrait)</h3>
+<div style="width:400px; height:400px; padding: 10px; border: #999 solid 1px; background-color: #ccc;">
+    <div id="a4-placeholder"></div>
+</div>
+
+<h3>Letter (Landscape)</h3>
+<div style="width:400px; height:400px; padding: 10px; border: #999 solid 1px; background-color: #ccc;">
+    <div id="letter-placeholder"></div>
+</div>
+
+<h3>Legal (Landscape)</h3>
+<div style="width:400px; height:400px; padding: 10px; border: #999 solid 1px; background-color: #ccc;">
+    <div id="legal-placeholder"></div>
+</div>
+
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="papr.min.js"></script>
+<script>
+(function() {
+
+    var a4 = new Papr('a4-placeholder', {
+        size: 'a4',
+        autoScale: true,
+        orientation: 'portrait',
+        ppi: 72
+    });
+
+    var letter = new Papr('letter-placeholder', {
+        size: 'letter',
+        autoScale: true,
+        orientation: 'landscape',
+        ppi: 72
+    });
+
+    var legal = new Papr('legal-placeholder', {
+        size: 'legal',
+        autoScale: true,
+        orientation: 'landscape',
+        ppi: 72
+    });
+
+    // Render A4 paper
+    a4.render();
+
+    // Render letter paper
+    letter.render();
+
+    // Render legal paper
+    legal.render();
+
+})();
+</script>
+</body>
+</html>
