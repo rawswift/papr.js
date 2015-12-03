@@ -97,7 +97,7 @@
             var paperSize = that.options.size.toLowerCase();
             var paperList = that.papers;
             var paper = paperList['letter'];
-            var ration = 0;
+            var ratio = 0;
             var newWidth = 0;
             var newHeight = 0;
             
