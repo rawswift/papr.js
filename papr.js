@@ -97,7 +97,9 @@
             var paperSize = that.options.size.toLowerCase();
             var paperList = that.papers;
             var paper = paperList['letter'];
-            var ratio = 0;
+            var scale = 0;
+            var scaleWidth = 0;
+            var scaleHeight = 0;
             var newWidth = 0;
             var newHeight = 0;
             
@@ -140,12 +142,11 @@
             };
 
             if (that.options.autoScale === true) {
-                ratio = that.obj.width() / that.obj.height();
-                newWidth = that.obj.width() - 1;
-                while (newWidth > that.objParent.width() || newHeight > that.objParent.height()) {
-                    newWidth = newWidth - 1;
-                    newHeight = newWidth / ratio;
-                }
+                scaleWidth = that.objParent.width() / that.obj.width();
+                scaleHeight = that.objParent.height() / that.obj.height();
+                scale = Math.min(scaleWidth, scaleHeight);
+                newWidth = that.obj.width() * scale;
+                newHeight = that.obj.height() * scale;
                 that.obj.css({
                     'width': newWidth,
                     'height': newHeight
