@@ -9,14 +9,19 @@
         var that = this;
         that.id = id;
         that.obj = $('#' + id);
-        that.objParent = that.obj.parent();
 
         // Options
         that.options = $.extend({
             size: 'letter', // A4, Letter, etc
-            ppi: 72,
-            autoScale: false,
+            dpi: 72,
             orientation: 'portrait', // Portrait or Landscape
+            showMargin: true,
+            margin: { // In inches
+                left: 1,
+                right: 1,
+                top: 1,
+                bottom: 1
+            },
             border: '#ccc dashed 1px',
             backgroundColor: '#eee'
         }, options);
@@ -103,9 +108,12 @@
             var newWidth = 0;
             var newHeight = 0;
             
+            that.obj.append('<div class="papr-' + that.id + '-top"><div class="papr-' + that.id + '-bottom"><div class="papr-' + that.id + '-left"><div class="papr-' + that.id + '-right"><div id="papr-' + that.id + '-child"></div></div></div></div></div>');
+            that.objChild = $('#papr-' + that.id + '-child');
+
             // Initial stylesheet
-            that.obj.attr('display', 'none');
-            that.obj.css({
+            // that.objChild.attr('display', 'none');
+            that.objChild.css({
                 'background-color': that.options.backgroundColor,
                 'border': that.options.border
             });
@@ -114,48 +122,60 @@
                 paper = paperList[paperSize];
             }
 
-            // Calculate pixel (based on PPI)
-            pixelWidth = paper.width * that.options.ppi;
-            pixelHeight = paper.height * that.options.ppi;
+            // Calculate pixel (based on DPI)
+            pixelWidth = paper.width * that.options.dpi;
+            pixelHeight = paper.height * that.options.dpi;
 
             // Set paper orientation
             switch (that.options.orientation.toLowerCase()) {
                 case 'portrait':
-                    that.obj.css({
+                    that.objChild.css({
                         'width': pixelWidth,
                         'height': pixelHeight
                     });
                     break; 
                 case 'landscape':
-                    that.obj.css({
+                    that.objChild.css({
                         'width': pixelHeight,
                         'height': pixelWidth
                     });
                     break;
                 default:
                     // Portrait as default
-                    that.obj.css({
+                    that.objChild.css({
                         'width': pixelWidth,
                         'height': pixelHeight
                     });
                     break;
             };
 
-            if (that.options.autoScale === true) {
-                scaleWidth = that.objParent.width() / that.obj.width();
-                scaleHeight = that.objParent.height() / that.obj.height();
-                scale = Math.min(scaleWidth, scaleHeight);
-                newWidth = that.obj.width() * scale;
-                newHeight = that.obj.height() * scale;
-                that.obj.css({
-                    'width': newWidth,
-                    'height': newHeight
-                });
+            scaleWidth = that.obj.width() / that.objChild.width();
+            scaleHeight = that.obj.height() / that.objChild.height();
+
+            scale = Math.min(scaleWidth, scaleHeight);
+
+            newWidth = that.objChild.width() * scale;
+            newHeight = that.objChild.height() * scale;
+
+            that.objChild.css({
+                'width': newWidth,
+                'height': newHeight
+            });
+
+            if (that.options.showMargin) {
+                marginLeft = (that.options.margin.left * that.options.dpi) * scale;
+                marginRight = (that.options.margin.right * that.options.dpi) * scale;
+                marginTop = (that.options.margin.top * that.options.dpi) * scale;
+                marginBottom = (that.options.margin.bottom * that.options.dpi) * scale;
+                marginTopBottom = that.objChild.height() - marginBottom;
+                $('head').append("<style>.papr-" + that.id + "-left,.papr-" + that.id + "-right,.papr-" + that.id + "-top,.papr-" + that.id + "-bottom{width:" + newWidth + "px;height:" + newHeight + "px;}.papr-" + that.id + "-left,.papr-" + that.id + "-right,.papr-" + that.id + "-top,.papr-" + that.id + "-bottom{margin:0 auto;position:relative;line-height:20px;background:#fff;}.papr-" + that.id + "-left::before{content:'';position:absolute;width:1px;top:0;left:" + marginLeft +"px;bottom:0;border-left:1px dashed;border-color:transparent #ccc;z-index:9999;}.papr-" + that.id + "-right::before {content:'';position:absolute;width:1px;top:0;right:" + marginRight + "px;bottom:0;border-right:1px dashed;border-color:transparent #ccc;z-index:9999;}.papr-" + that.id + "-top::before {content:'';position:absolute;width:100%;height:1px;top:" + marginTop + "px;left:0;bottom:0;border-color:transparent #ccc;border-bottom:#ccc dashed 1px;z-index:9999;}.papr-" + that.id + "-bottom::before {content:'';position:absolute;width:100%;height:1px;top:" + marginTopBottom + "px;left:0;bottom:" + marginBottom + "px;border-color:transparent #ccc;border-top:#ccc dashed 1px;z-index:9999;}</style>");
             }
+            
         },
+        
         render: function() {
             var that = this;
-            that.obj.attr('display', 'block');
+            that.objChild.attr('display', 'block');
         }
     };
 }(jQuery));

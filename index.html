@@ -13,26 +13,62 @@
             font-family: Arial, Helvetica, sans-serif;
             color: #888;
         }
+        table {
+            font-size: 12px;
+        }
+        .left {
+            text-align: left;
+        }
+        .right {
+            text-align: right;
+        }
     </style>
 </head>
 <body>
 
 <h1>Papr.js</h1>
 
-<h3>A4 (Portrait)</h3>
-<div style="width:400px; height:400px; padding: 10px; border: #999 solid 1px; background-color: #ccc;">
-    <div id="a4-placeholder"></div>
-</div>
+<p>Paper placeholder.</p>
 
-<h3>Letter (Landscape)</h3>
-<div style="width:400px; height:400px; padding: 10px; border: #999 solid 1px; background-color: #ccc;">
-    <div id="letter-placeholder"></div>
-</div>
+<h3>A4</h3>
+<table>
+    <tr><td class="right">Orientation:</td><td class="left">Portrait</td></tr>
+    <tr><td class="right">Margin:</td><td class="left">0.5 Inches</td></tr>
+</table>
+<hr />
 
-<h3>Legal (Landscape)</h3>
-<div style="width:400px; height:400px; padding: 10px; border: #999 solid 1px; background-color: #ccc;">
-    <div id="legal-placeholder"></div>
-</div>
+<div id="a4-placeholder" style="width:400px; height:400px;"></div>
+
+<h3>Letter</h3>
+<table>
+    <tr><td class="right">Orientation:</td><td class="left">Landscape</td></tr>
+    <tr><td class="right">Margin:</td><td class="left">1 Inches</td></tr>
+</table>
+<hr />
+
+<div id="letter-placeholder" style="width:400px; height:400px;"></div>
+
+<h3>Legal</h3>
+<table>
+    <tr><td class="right">Orientation:</td><td class="left">Landscape</td></tr>
+    <tr><td class="right">Margin:</td><td class="left">2 Inches</td></tr>
+</table>
+<hr />
+
+<div id="legal-placeholder" style="width:400px; height:400px;"></div>
+
+<h3>Letter (no margin marker)</h3>
+<table>
+    <tr><td class="right">Orientation:</td><td class="left">Portrait</td></tr>
+    <tr><td class="right">Margin:</td><td class="left">N/A</td></tr>
+</table>
+<hr />
+
+<div id="letter-nomargin-placeholder" style="width:400px; height:400px;"></div>
+
+<h3>Documentation</h3>
+
+<p>Visit <a href="https://github.com/rawswift/papr.js">Papr.js on GitHub</a></p>
 
 <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="papr.min.js"></script>
@@ -41,33 +77,40 @@
 
     var a4 = new Papr('a4-placeholder', {
         size: 'a4',
-        autoScale: true,
         orientation: 'portrait',
-        ppi: 72
+        margin: {
+            left: 0.5,
+            right: 0.5,
+            top: 0.5,
+            bottom: 0.5
+        },
+        dpi: 72
     });
 
     var letter = new Papr('letter-placeholder', {
         size: 'letter',
-        autoScale: true,
         orientation: 'landscape',
-        ppi: 72
+        dpi: 72
     });
 
     var legal = new Papr('legal-placeholder', {
         size: 'legal',
-        autoScale: true,
         orientation: 'landscape',
-        ppi: 72
+        dpi: 72,
+        margin: {
+            left: 2,
+            right: 2,
+            top: 2,
+            bottom: 2
+        }
     });
 
-    // Render A4 paper
-    a4.render();
-
-    // Render letter paper
-    letter.render();
-
-    // Render legal paper
-    legal.render();
+    var letter = new Papr('letter-nomargin-placeholder', {
+        size: 'letter',
+        showMargin: false,
+        orientation: 'portrait',
+        dpi: 72
+    });
 
 })();
 </script>
