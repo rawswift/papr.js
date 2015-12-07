@@ -108,7 +108,9 @@
             var newWidth = 0;
             var newHeight = 0;
             
-            that.obj.append('<div class="papr-' + that.id + '-top"><div class="papr-' + that.id + '-bottom"><div class="papr-' + that.id + '-left"><div class="papr-' + that.id + '-right"><div id="papr-' + that.id + '-child"></div></div></div></div></div>');
+            objHtml = that.obj.html();
+            that.obj.html('<div class="papr-' + that.id + '-top"><div class="papr-' + that.id + '-bottom"><div class="papr-' + that.id + '-left"><div class="papr-' + that.id + '-right"><div id="papr-' + that.id + '-child">' + objHtml + '</div></div></div></div></div>');
+
             that.objChild = $('#papr-' + that.id + '-child');
 
             // Initial stylesheet
