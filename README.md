@@ -42,7 +42,7 @@ Configure paper attributes and render the paper:
         var a4 = new Papr('placeholder', {
             size: 'a4', // Paper size
             orientation: 'portrait', // Or 'landscape'
-            dpi: 72, // Resolution e.g. 300 PPI (hi-res)
+            dpi: 72, // Resolution e.g. 300 DPI (hi-res)
             margin: { // Optional (Default: 1 inch)
                 left: 0.5,
                 right: 0.5,
