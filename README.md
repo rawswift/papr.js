@@ -4,6 +4,8 @@ Paper placeholder.
 
 ## Paper Size
 
+Here's a list of the predefined paper sizes:
+
 American paper sizes:
 
 - Letter
@@ -23,6 +25,8 @@ ISO A paper sizes:
 - A6
 - A7
 - A8
+
+*You can also create a custom sized paper.*
 
 ## Usage
 

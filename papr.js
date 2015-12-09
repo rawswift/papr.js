@@ -23,7 +23,8 @@
                 bottom: 1
             },
             border: '#ccc dashed 1px',
-            backgroundColor: '#eee'
+            backgroundColor: '#eee',
+            customSize: {}
         }, options);
 
         // Paper sizes (in inches)
@@ -120,7 +121,10 @@
                 'border': that.options.border
             });
 
-            if (paperList.hasOwnProperty(paperSize)) {
+            // Check if customSize option is set
+            if (typeof that.options.customSize.width !== 'undefined' && typeof that.options.customSize.height !== 'undefined') {
+                paper = that.options.customSize;
+            } else if (paperList.hasOwnProperty(paperSize)) {
                 paper = paperList[paperSize];
             }
 

@@ -66,6 +66,15 @@
 
 <div id="letter-nomargin-placeholder" style="width:400px; height:400px;"></div>
 
+<h3>Custom size (9"x12" @ 300 DPI)</h3>
+<table>
+    <tr><td class="right">Orientation:</td><td class="left">Landscape</td></tr>
+    <tr><td class="right">Margin:</td><td class="left">0.5 Inches</td></tr>
+</table>
+<hr />
+
+<div id="custom-size-placeholder" style="width:400px; height:400px;"></div>
+
 <h3>Documentation</h3>
 
 <p>Visit <a href="https://github.com/rawswift/papr.js">Papr.js on GitHub</a></p>
@@ -110,6 +119,15 @@
         showMargin: false,
         orientation: 'portrait',
         dpi: 72
+    });
+
+    var letter = new Papr('custom-size-placeholder', {
+        customSize: {
+            width: 9,
+            height: 12
+        },
+        orientation: 'landscape',
+        dpi: 300
     });
 
 })();
